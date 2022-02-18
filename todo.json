@@ -1,0 +1,18 @@
+{
+    "todoList": [
+        {
+            "title": "High importance",
+            "data": ["go shopping", "go to the gym", "go to the movies"]
+        },
+        {
+            "title": "Medium importance",
+            "data": ["go to the movies", "go to the gym", "go shopping"]
+        },
+        {
+            "title": "Low importance",
+            "data": ["go shopping", "go to the gym"]
+        }
+    ],
+
+    "completedTasks": []
+}
