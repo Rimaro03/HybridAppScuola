@@ -1,16 +1,16 @@
 {
-    "todoList": [
+    "lists": [
         {
             "title": "High importance",
-            "data": ["go shopping", "go to the gym", "go to the movies"]
+            "data": ["A", "B", "C"]
         },
         {
             "title": "Medium importance",
-            "data": ["go to the movies", "go to the gym", "go shopping"]
+            "data": ["D", "E", "F"]
         },
         {
             "title": "Low importance",
-            "data": ["go shopping", "go to the gym"]
+            "data": ["G", "H"]
         }
     ],
 

@@ -7,23 +7,20 @@ const TodoList = (todoList) => {
     const task = e.target.value;
     console.log(task);
     setTodos([todos, task]);
-
-    return (
-      <SectionList
-        style={styles.list}
-        sections={todoList["todoList"]}
-        renderItem={({ item }) => (
-          <Text style={styles.item} onPress={() => changeTaskStatus(item)}>
-            {item}
-          </Text>
-        )}
-        keyExtractor={(item, index) => index}
-      />
-    );
   };
+
+  return (
+    <SectionList
+      style={styles.list}
+      sections={todoList["todoList"]}
+      renderItem={({ item }) => (
+        <Text style={styles.item} onPress={() => changeTaskStatus(item)}>
+          {item}
+        </Text>
+      )}
+      keyExtractor={(item, index) => index}
+    />
+  );
 };
 
 export default TodoList;
-
-
-
