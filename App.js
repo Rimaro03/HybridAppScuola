@@ -1,68 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
 import reactDom from 'react-dom';
-import { StyleSheet, Text, View, SectionList, TextInput, Image } from 'react-native';
-import { useState } from 'react'
+import { StyleSheet, Text, View, ScrollView, SectionList, TextInput, Image } from 'react-native';
+import { React, useState } from 'react'
 import { Button, ButtonGroup, withTheme } from 'react-native-elements';
+import { readDatas } from './functions/readDatas'
+import { storeDatas } from './functions/storeDatas';
+import { ButtonObj } from './components/ButtonObj';
+import { TodoList } from './components/TodoList';
+import { CompletedTasks } from './components/CompletedTasks';
 
 const todoListJSON = require("./todo.json")
 
-const TodoList = (props) => {
-    const [todoList, setTodoList] = useState(props.list)
-
-    const changeTaskStatus = (task) => {
-        console.log(props)
-        todoList.completedTasks.push(<Text style={styles.completedTask}>{task}</Text>)
-        todoList.lists.splice(todoList.lists.indexOf(task), 1)
-    }
-
-    return (
-        <SectionList
-            style={styles.list}
-            sections={props.list.lists}
-            renderItem={({ item }) => (
-                <Text style={styles.item} onPress={() => changeTaskStatus(item)}>
-                    <Image source={require('./assets/unchecked.png')} style={styles.checkbox} />
-                    {item}
-                </Text>
-            )}
-            keyExtractor={(item, index) => index}
-        />
-
-    );
-};
-
-const CompletedTasks = (props) => {
-    const [todoList, setTodoList] = useState(props.list)
-
-    const changeTaskStatus = (task) => {
-        console.log(props)
-        /*todoList.completedTasks.push(<Text style={styles.completedTask}>{task}</Text>)
-        todoList.lists.splice(todoList.lists.indexOf(task), 1)*/
-    }
-
-    return (
-        <SectionList
-            style={styles.list}
-            sections={props.list.CompletedTasks}
-            renderItem={({ item }) => (
-                <Text style={styles.item} onPress={() => changeTaskStatus(item)}>
-                    <Image source={require('./assets/checked.png')} style={styles.checkbox} />
-                    {item}
-                </Text>
-            )}
-            keyExtractor={(item, index) => index}
-        />
-
-    );
-};
+const AddSomething = React.forwardRef((props, ref) => (
+    <TextInput
+        ref={ref}
+    />
+));
 
 export default function App() {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Todo List:</Text>
-            <TodoList list={todoListJSON} />
-            <Text style={styles.title}>Completed tasks:</Text>
-            <CompletedTasks list={todoListJSON} />
+            <View style={styles.listsContainer}>
+                <TodoList list={todoListJSON} />
+                <CompletedTasks list={todoListJSON} />
+            </View>
+            <View style={styles.bottomMenu}>
+                <ButtonObj />
+            </View>
+            <View>
+                <AddSomething
+                    textChange={textInput => this.setState({ textInput })}
+                    addNewItem={this.addItem.bind(this)}
+                    textInput={this.state.textInput}
+                    ref={(ref) => { this.textInputField = ref }}
+                />
+                <FloatingButton tapToAddHandler={this.onFloatingButtonPress.bind(this)} />
+            </View>
         </View>
     );
 }
@@ -71,6 +44,16 @@ const styles = StyleSheet.create({
     container: {
         marginTop: 50,
         width: '100%',
+        height: '94%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    listsContainer: {
+        width: '100%',
+        padding: 0,
+        margin: 0,
     },
     title: {
         fontSize: 30,
@@ -86,5 +69,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         height: 44,
         backgroundColor: "rgb(51,51,51)",
+    },
+    bottomMenu: {
+        width: '100%',
+        height: 50,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'flex-end',
     },
 });
